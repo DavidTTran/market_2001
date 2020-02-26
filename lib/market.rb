@@ -21,7 +21,7 @@ class Market
   def sorted_item_list
     all_items = []
     @vendors.each do |vendor|
-      vendor.inventory.sort_by do |item|
+      vendor.inventory.each do |item|
         all_items << item.first.name
       end
     end
@@ -31,7 +31,7 @@ class Market
   def list_all_items
     all_items = []
     @vendors.each do |vendor|
-      vendor.inventory.sort_by do |item|
+      vendor.inventory.each do |item|
         all_items << item.first
       end
     end
@@ -45,9 +45,8 @@ class Market
   end
 
   def quantity_sold_by_vendors(item)
-    total = 0
-    @vendors.each do |vendor|
-      total += vendor.check_stock(item)
+    total = @vendors.sum do |vendor|
+      vendor.check_stock(item)
     end
     total
   end
