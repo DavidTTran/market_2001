@@ -82,12 +82,28 @@ class MarketTest < Minitest::Test
     assert_equal expected, @market.total_inventory
   end
 
-  def test_it_can_return_all_items
+  def test_it_can_return_all_items_names_sorted
     @market.add_vendor(@vendor1)
     @market.add_vendor(@vendor2)
     @market.add_vendor(@vendor3)
 
     assert_equal [@item4.name, @item1.name, @item3.name, @item2.name], @market.sorted_item_list
+  end
+
+  def test_it_can_return_all_items
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+
+    assert_equal [@item1, @item2, @item4, @item3], @market.list_all_items
+  end
+
+  def test_it_can_find_vendors_that_sell_an_item
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+
+    assert_equal [@vendor1, @vendor3], @market.vendors_that_sell(@item1)
   end
 
   def test_it_can_find_overstocked_items
