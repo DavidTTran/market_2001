@@ -11,11 +11,11 @@ class Market
   end
 
   def vendor_names
-    names = @vendors.map { |vendor| vendor.name }
+    @vendors.map { |vendor| vendor.name }
   end
 
   def vendors_that_sell(item)
-    vendors = @vendors.find_all { |vendor| vendor.inventory.include?(item) }
+    @vendors.find_all { |vendor| vendor.inventory.include?(item) }
   end
 
   def sorted_item_list
